@@ -1,0 +1,7 @@
+{
+	"parent": "terraria:block/bars/base",
+	"textures": {
+        "0": "tcmp:blocks/bars/example",
+		"particle": "tcmp:items/bars/example"
+	}
+}

@@ -1,0 +1,16 @@
+[
+{
+  "modid": "tcmp",
+  "name": "TerrariaCraft Multiplayer",
+  "description": "Example placeholder addon for Terraria Craft.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Zeitheron"],
+  "credits": "The Forge and FML guys, for making this example",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

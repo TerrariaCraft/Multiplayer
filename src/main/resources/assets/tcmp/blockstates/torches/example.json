@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "facing=up": { "model": "tcmp:torches/example/on" },
+        "facing=east": { "model": "tcmp:torches/example/on_wall" },
+        "facing=south": { "model": "tcmp:torches/example/on_wall", "y": 90 },
+        "facing=west": { "model": "tcmp:torches/example/on_wall", "y": 180 },
+        "facing=north": { "model": "tcmp:torches/example/on_wall", "y": 270 }
+    }
+}

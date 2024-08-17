@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"normal": [
+			{ "model": "tcmp:bars/example" },
+			{ "model": "tcmp:bars/example", "y": 90 },
+			{ "model": "tcmp:bars/example", "y": 180 },
+			{ "model": "tcmp:bars/example", "y": 270 }
+		]
+	}
+}

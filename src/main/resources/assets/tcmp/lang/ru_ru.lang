@@ -1,0 +1,36 @@
+# Cloudflared Locals
+
+chat.cloudflared:not_installed=Мы обнаружили, что у вас не установлен Cloudflared.
+
+chat.cloudflared:starting_tunnel=Выполняется запуск Cloudflared туннеля...
+chat.cloudflared:tunnel_open=Tunnel opened to %s. This address can be either added as a server, or be directly connected to from Multiplayer screen.
+chat.cloudflared:game_logs=game logs
+chat.cloudflared:tunnel_open_unknown=Tunnel is probably open, but the mod was unable to obtain the address. Please check %s to see details.
+chat.cloudflared:click_to_suggest=Click to suggest in chatbox. (You can copy using Ctrl+A and Ctrl+C key combinations)
+chat.cloudflared:click_to_open=Click to open file
+
+chat.cloudflared:open_url=Click to open URL
+chat.cloudflared:here=here
+
+# TCMP Locals
+
+toast.tcmp.incoming_request=Входящий запрос
+toast.tcmp.outgoing_request=Исходящий запрос
+toast.tcmp.request_sent=Запрос отправлен
+toast.tcmp.request_accepted=Запрос принят
+toast.tcmp.request_declined=Запрос отклонён
+toast.tcmp.inactive_code=Код недоступен
+
+gui.tcmp:unfriend_question=Вы уверены, что хотите удалить этого игрока?
+gui.tcmp:unfriend_warning=будет удалён из вашего списка друзей!
+
+gui.tcmp:friend_list=Список друзей
+gui.tcmp:friend_requests=Запросы
+gui.tcmp:copy_friend_code=Скопировать код друга
+gui.tcmp:send_request=Отправить запрос
+gui.tcmp:refresh=Обновить
+gui.tcmp:accept=Принять
+gui.tcmp:decline=Отклонить
+gui.tcmp:join=Присоединиться
+gui.tcmp:unfriend=Удалить
+gui.tcmp:send_world=Отправить мир

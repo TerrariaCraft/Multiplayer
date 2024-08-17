@@ -1,0 +1,23 @@
+{
+	"id": "tcmp",
+	"name": "TerrariaCraft Multiplayer",
+	"description": "Sample description that will be shown to users.",
+	"authors": [
+		"Zeitheron"
+	],
+	"website": "https://terrariacraft.com",
+	"issues_page": "https://github.com/TerrariaCraft/Issues/issues/",
+	"icon_path": "assets/tcmp/textures/icon.png",
+	"social": {
+		"discord": "https://discord.terrariacraft.com",
+		"twitter": "https://twitter.com/TerrariaCraftMC"
+	},
+	"compatibility": {
+		"public_versions": [
+			"[12.5.29,12.6.)"
+		],
+		"idev_versions": [
+			"[idev-,)"
+		]
+	}
+}
