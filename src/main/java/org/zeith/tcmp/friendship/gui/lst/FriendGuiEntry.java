@@ -39,14 +39,14 @@ public class FriendGuiEntry
 	{
 		return new String[] {
 				I18n.format("gui.tcmp:join"),
-				I18n.format("gui.tcmp:send_world"),
+//				I18n.format("gui.tcmp:send_world"),
 				I18n.format("gui.tcmp:unfriend")
 		};
 	}
 	
 	public boolean isEnabled(int button)
 	{
-		if(button != 2) return online != null;
+		if(button != 1) return online != null;
 		return true;
 	}
 	
@@ -64,7 +64,7 @@ public class FriendGuiEntry
 			));
 		}
 		
-		if(button == 2)
+		if(button == 1)
 		{
 			GuiScreen gs = mc.currentScreen;
 			String s = I18n.format("gui.tcmp:unfriend_question");
