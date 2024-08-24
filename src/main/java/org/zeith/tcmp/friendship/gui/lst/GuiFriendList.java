@@ -4,8 +4,7 @@ import com.zeitheron.hammercore.utils.color.ColorHelper;
 import lombok.val;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiListExtended;
+import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.I18n;
@@ -27,6 +26,7 @@ import org.zeith.terraria.api.client.gui.UVs;
 import org.zeith.terraria.client.gui.api.GuiBaseMainBG;
 import org.zeith.terraria.client.gui.mc.buttons.GuiButtonSpriteAndBg;
 import org.zeith.terraria.client.gui.oow.GuiTerrariaMainMenu;
+import org.zeith.terraria.client.player.characters.ClientActiveCharacterData;
 import org.zeith.terraria.init.SoundsTC;
 
 import java.io.IOException;
@@ -223,7 +223,11 @@ public class GuiFriendList
 						UVs.fullTexture(Resources.location(TCMultiplayer.MODID, "textures/gui/friends.png")),
 						UVs.fullTexture(Resources.location(TCMultiplayer.MODID, "textures/gui/friends_hovered.png"))
 				).withSound(SoundsTC.MENU_OPEN.sound).withCallback(() ->
-						Minecraft.getMinecraft().displayGuiScreen(new GuiFriendList(gtmm))
+						ClientActiveCharacterData.chooseCharacter(true).thenAccept(res ->
+						{
+							if(!res.isCancelled())
+								Minecraft.getMinecraft().displayGuiScreen(new GuiFriendList(gtmm));
+						})
 				)
 		);
 	}
