@@ -2,7 +2,7 @@
 mod_id=tcmp
 mod_id_fancy=TerrariaCraftMultiplayer
 mod_name=TerrariaCraft Multiplayer
-mod_version=12.6.2
+mod_version=12.6.3
 author=Zeitheron
 
 #Runtime info
