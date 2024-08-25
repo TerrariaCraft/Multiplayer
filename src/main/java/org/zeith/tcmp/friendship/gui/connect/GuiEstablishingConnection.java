@@ -34,7 +34,7 @@ public class GuiEstablishingConnection
 	
 	public GuiEstablishingConnection(GuiFriendList parent, FriendEntry friend, OnlinePerson person)
 	{
-		this.panoramaTime = parent.panoramaTime;
+		setFrom(parent);
 		this.parent = parent;
 		this.friend = friend;
 		this.person = person;
@@ -141,7 +141,7 @@ public class GuiEstablishingConnection
 	
 	public void close()
 	{
-		this.parent.panoramaTime = this.panoramaTime;
+		setTo(parent);
 		this.mc.displayGuiScreen(this.parent);
 		if(this.mc.currentScreen == null) this.mc.setIngameFocus();
 		if(establishedAddress != null) establishedAddress.cancel(true);

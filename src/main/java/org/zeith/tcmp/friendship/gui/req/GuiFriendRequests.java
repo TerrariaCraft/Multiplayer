@@ -36,7 +36,7 @@ public class GuiFriendRequests
 	
 	public GuiFriendRequests(GuiFriendList parent)
 	{
-		this.panoramaTime = parent.panoramaTime;
+		setFrom(parent);
 		this.parent = parent;
 	}
 	
@@ -157,7 +157,7 @@ public class GuiFriendRequests
 	
 	public void close()
 	{
-		this.parent.panoramaTime = this.panoramaTime;
+		setTo(this.parent);
 		this.mc.displayGuiScreen(this.parent);
 		if(this.mc.currentScreen == null) this.mc.setIngameFocus();
 	}

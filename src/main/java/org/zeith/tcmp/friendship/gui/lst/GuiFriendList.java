@@ -48,7 +48,7 @@ public class GuiFriendList
 	
 	public GuiFriendList(GuiTerrariaMainMenu parent)
 	{
-		this.panoramaTime = parent.panoramaTime;
+		setFrom(parent);
 		this.parent = parent;
 		McAuth.createServices();
 	}
@@ -190,7 +190,7 @@ public class GuiFriendList
 	
 	public void close()
 	{
-		this.parent.panoramaTime = this.panoramaTime;
+		setTo(this.parent);
 		this.mc.displayGuiScreen(this.parent);
 		if(this.mc.currentScreen == null) this.mc.setIngameFocus();
 		mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundsTC.MENU_CLOSE.sound, 1F));
