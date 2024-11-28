@@ -2,25 +2,28 @@ package org.zeith.tcmp.friendship.gui.req;
 
 import com.mojang.authlib.GameProfile;
 import com.zeitheron.hammercore.client.utils.RenderUtil;
+import lombok.val;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiListExtended;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import org.zeith.tcmp.friendship.gui.McAuth;
+import org.zeith.tcmp.util.ProfileCache;
 import org.zeith.terraria.client.util.BlinkingText;
+
+import java.util.function.Supplier;
 
 public abstract class BaseFriendRequest
 		implements GuiListExtended.IGuiListEntry
 {
-	protected GameProfile profile;
+	protected Supplier<GameProfile> profile;
 	
 	public int hoveredButton;
 	
 	public BaseFriendRequest(GameProfile profile)
 	{
-		this.profile = McAuth.updateProfile(profile);
+		this.profile = ProfileCache.fillWithCacheRef(profile);
 	}
 	
 	public abstract String getRequestType();
@@ -53,6 +56,7 @@ public abstract class BaseFriendRequest
 		Minecraft mc = Minecraft.getMinecraft();
 		FontRenderer font = mc.fontRenderer;
 		
+		val profile = this.profile.get();
 		SkinHeadRenderer.renderSkin(profile, true, x + 1, y + 1, slotHeight - 4, slotHeight - 4);
 		String rt = getRequestType();
 		BlinkingText.renderText(x + slotHeight, y + 3, rt, 0xFFFFFFFF, true, false, 0.25F, 1F);

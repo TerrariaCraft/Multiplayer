@@ -25,17 +25,6 @@ public class McAuth
 	public static GameProfile updateProfile(GameProfile profile)
 	{
 		if(profile == null) return null;
-		
-		if(!Minecraft.getMinecraft().isCallingFromMinecraftThread())
-		{
-			Minecraft.getMinecraft().addScheduledTask(() ->
-			{
-				TileEntitySkull.updateGameProfile(profile);
-			});
-			
-			return profile;
-		}
-		
 		return TileEntitySkull.updateGameProfile(profile);
 	}
 	
