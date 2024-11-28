@@ -8,9 +8,9 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import org.lwjgl.input.Keyboard;
 import org.zeith.hammeranims.api.McUtil;
+import org.zeith.tcmp.TCMultiplayer;
 import org.zeith.tcmp.friendship.FriendEntry;
 import org.zeith.tcmp.friendship.gui.lst.GuiFriendList;
-import org.zeith.tcmp.friendship.gui.req.GuiFriendRequests;
 import org.zeith.tcmp.friendship.net.OnlinePerson;
 import org.zeith.tcmp.friendship.net.client.FriendshipPromise;
 import org.zeith.tcmp.proxy.ClientProxy;
@@ -23,7 +23,6 @@ public class GuiEstablishingConnection
 		extends GuiBaseMainBG
 {
 	private final GuiFriendList parent;
-	private GuiFriendRequests.RequestList requestList;
 	
 	protected int dirtFade;
 	
@@ -32,6 +31,11 @@ public class GuiEstablishingConnection
 	
 	protected CompletableFuture<ServerAddress> establishedAddress;
 	
+	public final int maxAttempts = 5;
+	public int attempt = 1;
+	
+	public String subtext = "";
+	
 	public GuiEstablishingConnection(GuiFriendList parent, FriendEntry friend, OnlinePerson person)
 	{
 		setFrom(parent);
@@ -39,6 +43,7 @@ public class GuiEstablishingConnection
 		this.friend = friend;
 		this.person = person;
 		openTunnel();
+		subtext = "Establishing connection...";
 	}
 	
 	public void openTunnel()
@@ -51,7 +56,7 @@ public class GuiEstablishingConnection
 				friend,
 				person
 		).thenApplyAsync(addrString ->
-				addrString != null && !addrString.isEmpty() ? ServerAddress.fromString(addrString) : null,
+						addrString != null && !addrString.isEmpty() ? ServerAddress.fromString(addrString) : null,
 				McUtil.backgroundExecutor()
 		);
 	}
@@ -84,6 +89,14 @@ public class GuiEstablishingConnection
 			ServerAddress sa = establishedAddress.join();
 			if(sa == null)
 			{
+				TCMultiplayer.LOG.error("Failed to establish connection. ({}/{})", attempt, maxAttempts);
+				if(attempt <= maxAttempts)
+				{
+					++attempt;
+					openTunnel();
+					subtext = "Establishing connection... (Attempt " + attempt + "/" + maxAttempts + ")";
+					return;
+				}
 				close();
 				return;
 			}
@@ -92,7 +105,8 @@ public class GuiEstablishingConnection
 					person.getUsername(),
 					sa.getIP() + ":" + sa.getPort(),
 					false
-			)));
+			)
+			));
 		}
 	}
 	
@@ -120,6 +134,7 @@ public class GuiEstablishingConnection
 		super.drawScreen(mouseX, mouseY, partialTicks);
 		
 		drawCenteredString(fontRenderer, "Joining " + person.getUsername() + "...", width / 2, height / 2, 0xFFFFFF);
+		drawCenteredString(fontRenderer, subtext, width / 2, height / 2 + fontRenderer.FONT_HEIGHT + 2, 0xFFFFFF);
 	}
 	
 	public void drawBackground(int tint, int alpha)
