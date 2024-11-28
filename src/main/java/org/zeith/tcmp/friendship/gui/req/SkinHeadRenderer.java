@@ -4,6 +4,7 @@ import com.mojang.authlib.GameProfile;
 import com.zeitheron.hammercore.client.utils.SkinUtils;
 import com.zeitheron.hammercore.client.utils.UV;
 import lombok.val;
+import org.zeith.tcmp.friendship.gui.McAuth;
 
 public class SkinHeadRenderer
 {
@@ -11,7 +12,7 @@ public class SkinHeadRenderer
 	{
 		if(profile == null) return;
 		
-		val st = SkinUtils.getSkinTexture(profile);
+		val st = McAuth.getSkinTexture(profile);
 		
 		UV u = new UV(st, 8 * 4, 8 * 4, 8 * 4, 8 * 4);
 		u.render(x, y, width, height);

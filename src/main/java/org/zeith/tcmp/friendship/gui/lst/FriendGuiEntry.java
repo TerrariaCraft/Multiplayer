@@ -10,12 +10,14 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import org.zeith.tcmp.TCMultiplayer;
 import org.zeith.tcmp.friendship.FriendEntry;
-import org.zeith.tcmp.friendship.gui.McAuth;
 import org.zeith.tcmp.friendship.gui.connect.GuiEstablishingConnection;
 import org.zeith.tcmp.friendship.gui.req.SkinHeadRenderer;
 import org.zeith.tcmp.friendship.net.OnlinePerson;
 import org.zeith.tcmp.proxy.ClientProxy;
+import org.zeith.tcmp.util.ProfileCache;
 import org.zeith.terraria.client.util.BlinkingText;
+
+import java.util.function.Supplier;
 
 public class FriendGuiEntry
 		implements GuiListExtended.IGuiListEntry
@@ -25,14 +27,13 @@ public class FriendGuiEntry
 	public OnlinePerson online;
 	
 	public int hoveredButton;
-	public GameProfile profile;
+	public Supplier<GameProfile> profile;
 	
 	public FriendGuiEntry(int index, FriendEntry entry)
 	{
-		this.profile = entry.getProfile();
+		this.profile = ProfileCache.fillWithCacheRef(entry.getProfile());
 		this.index = index;
 		this.entry = entry;
-		if(this.profile != null) this.profile = McAuth.updateProfile(this.profile);
 	}
 	
 	public String[] getButtons()
@@ -66,6 +67,7 @@ public class FriendGuiEntry
 		
 		if(button == 1)
 		{
+			val profile = this.profile.get();
 			GuiScreen gs = mc.currentScreen;
 			String s = I18n.format("gui.tcmp:unfriend_question");
 			String s1 = "'" + profile.getName() + "' " + I18n.format("gui.tcmp:unfriend_warning");
@@ -85,7 +87,8 @@ public class FriendGuiEntry
 					}
 				}
 				mc.displayGuiScreen(gs);
-			}, s, s1, s2, s3, 1);
+			}, s, s1, s2, s3, 1
+			);
 			mc.displayGuiScreen(guiyesno);
 		}
 	}
@@ -107,6 +110,7 @@ public class FriendGuiEntry
 		Minecraft mc = Minecraft.getMinecraft();
 		FontRenderer font = mc.fontRenderer;
 		
+		val profile = this.profile.get();
 		SkinHeadRenderer.renderSkin(profile, true, x + 1, y + 1, slotHeight - 4, slotHeight - 4);
 		BlinkingText.renderText(x + slotHeight, y + 3, profile.getName(), 0xFFFFFFFF, true, false, 0.25F, 1F);
 		

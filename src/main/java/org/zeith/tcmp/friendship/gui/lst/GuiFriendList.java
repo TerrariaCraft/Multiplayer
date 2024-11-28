@@ -78,9 +78,11 @@ public class GuiFriendList
 		friendsList.setSlotXBoundsFromLeft(32);
 		friendsList.registerScrollButtons(7, 8);
 		
-		addButton(new GuiButton(0, width / 2 - 50 + 110, height - 22, 100, 20, I18n.format("gui.back")));
-		addButton(new GuiButton(1, width / 2 - 50 - 110, height - 22, 100, 20, I18n.format("gui.tcmp:friend_requests")));
-		refreshBtn = addButton(new GuiButton(2, width / 2 - 50, height - 22, 100, 20, I18n.format("gui.tcmp:refresh")));
+		val tick = SoundsTC.MENU_TICK.sound;
+		
+		addButton(new org.zeith.terraria.client.gui.mc.buttons.GuiButton(0, width / 2 - 50 + 110, height - 22, 100, 20, I18n.format("gui.back")).withSound(tick));
+		addButton(new org.zeith.terraria.client.gui.mc.buttons.GuiButton(1, width / 2 - 50 - 110, height - 22, 100, 20, I18n.format("gui.tcmp:friend_requests")).withSound(tick));
+		refreshBtn = addButton(new org.zeith.terraria.client.gui.mc.buttons.GuiButton(2, width / 2 - 50, height - 22, 100, 20, I18n.format("gui.tcmp:refresh")).withSound(tick));
 		
 		refreshFriendList();
 	}
@@ -175,17 +177,18 @@ public class GuiFriendList
 		if(refreshTask != null && !refreshTask.isDone()) return;
 		refreshBtn.enabled = false;
 		refreshTask = CompletableFuture.runAsync(() ->
-		{
-			try
-			{
-				Map<String, OnlinePerson> list = FriendshipConstants.list();
-				for(FriendGuiEntry fr : friends)
-					fr.online = list.get(fr.entry.getKey());
-			} finally
-			{
-				refreshBtn.enabled = true;
-			}
-		}, McUtil.backgroundExecutor());
+				{
+					try
+					{
+						Map<String, OnlinePerson> list = FriendshipConstants.list();
+						for(FriendGuiEntry fr : friends)
+							fr.online = list.get(fr.entry.getKey());
+					} finally
+					{
+						refreshBtn.enabled = true;
+					}
+				}, McUtil.backgroundExecutor()
+		);
 	}
 	
 	public void close()

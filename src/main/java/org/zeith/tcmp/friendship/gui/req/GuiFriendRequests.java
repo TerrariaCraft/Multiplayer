@@ -15,7 +15,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EnumPlayerModelParts;
 import net.minecraft.util.text.*;
 import org.lwjgl.input.Keyboard;
-import org.zeith.tcmp.friendship.gui.McAuth;
 import org.zeith.tcmp.friendship.gui.lst.GuiFriendList;
 import org.zeith.tcmp.proxy.ClientProxy;
 import org.zeith.terraria.client.gui.api.GuiBaseMainBG;
@@ -46,7 +45,6 @@ public class GuiFriendRequests
 		super.initGui();
 		
 		profile = mc.getSession().getProfile();
-		profile = McAuth.updateProfile(profile);
 		
 		INCOMING_REQUESTS.removeIf(BaseFriendRequest::isExpired);
 		
