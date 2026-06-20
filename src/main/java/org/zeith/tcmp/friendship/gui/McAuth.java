@@ -1,7 +1,6 @@
 package org.zeith.tcmp.friendship.gui;
 
-import com.mojang.authlib.AuthenticationService;
-import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.*;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 import lombok.val;
@@ -12,11 +11,10 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PlayerProfileCache;
 import net.minecraft.tileentity.TileEntitySkull;
 import net.minecraft.util.ResourceLocation;
-import org.zeith.hammeranims.api.McUtil;
+import org.zeith.tcmp.util.BgExecutor;
 
 import java.io.File;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class McAuth
 {
@@ -32,7 +30,7 @@ public class McAuth
 	{
 		if(created) return;
 		created = true;
-		McUtil.backgroundExecutor().submit(() ->
+		BgExecutor.bgExecutor().submit(() ->
 		{
 			val mc = Minecraft.getMinecraft();
 			AuthenticationService auth = new YggdrasilAuthenticationService(mc.getProxy(), UUID.randomUUID().toString());

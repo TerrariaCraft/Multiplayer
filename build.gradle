@@ -101,6 +101,8 @@ dependencies {
     implementation("net.minecraftforge:mergetool:0.2.3.3") { force = true }
     minecraft "net.minecraftforge:forge:${config.minecraft_version}-${config.forge_version}"
 
+    tcImplementation "org.zeith.HammerLib:HammerLib-1.12.2:12.2.63:deobf"
+
     def deps = new String(Base64.getDecoder().decode(tc_build_data)).replace('\r', '').replace('\n', '').split("[|]")
     for (final def d in deps) {
         if (d.endsWith(">")) {

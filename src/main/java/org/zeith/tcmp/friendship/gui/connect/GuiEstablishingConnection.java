@@ -7,13 +7,13 @@ import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import org.lwjgl.input.Keyboard;
-import org.zeith.hammeranims.api.McUtil;
 import org.zeith.tcmp.TCMultiplayer;
 import org.zeith.tcmp.friendship.FriendEntry;
 import org.zeith.tcmp.friendship.gui.lst.GuiFriendList;
 import org.zeith.tcmp.friendship.net.OnlinePerson;
 import org.zeith.tcmp.friendship.net.client.FriendshipPromise;
 import org.zeith.tcmp.proxy.ClientProxy;
+import org.zeith.tcmp.util.BgExecutor;
 import org.zeith.terraria.client.gui.api.GuiBaseMainBG;
 
 import java.io.IOException;
@@ -57,7 +57,7 @@ public class GuiEstablishingConnection
 				person
 		).thenApplyAsync(addrString ->
 						addrString != null && !addrString.isEmpty() ? ServerAddress.fromString(addrString) : null,
-				McUtil.backgroundExecutor()
+				BgExecutor.bgExecutor()
 		);
 	}
 	

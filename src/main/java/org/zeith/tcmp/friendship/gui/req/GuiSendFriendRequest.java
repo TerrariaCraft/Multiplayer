@@ -4,20 +4,18 @@ import com.mojang.authlib.GameProfile;
 import lombok.val;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.toasts.GuiToast;
-import net.minecraft.client.gui.toasts.SystemToast;
+import net.minecraft.client.gui.toasts.*;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.*;
-import org.zeith.hammeranims.api.McUtil;
 import org.zeith.tcmp.friendship.FriendshipDatabase;
 import org.zeith.tcmp.friendship.gui.GuiOverScreen;
 import org.zeith.tcmp.friendship.net.*;
 import org.zeith.tcmp.friendship.net.client.FriendshipPromise;
 import org.zeith.tcmp.proxy.ClientProxy;
+import org.zeith.tcmp.util.BgExecutor;
 
 import java.io.IOException;
-import java.time.Duration;
-import java.time.Instant;
+import java.time.*;
 import java.util.concurrent.CompletableFuture;
 
 public class GuiSendFriendRequest
@@ -133,6 +131,6 @@ public class GuiSendFriendRequest
 			GameProfile profile = new GameProfile(null, person.getUsername());
 			val now = Instant.now();
 			GuiFriendRequests.friendRequest(new OutgoingFriendRequest(profile, approval, now, now.plus(timeout)), person.getUsername());
-		}, McUtil.backgroundExecutor());
+		}, BgExecutor.bgExecutor());
 	}
 }

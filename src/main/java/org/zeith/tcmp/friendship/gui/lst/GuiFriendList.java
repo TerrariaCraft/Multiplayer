@@ -5,23 +5,21 @@ import lombok.val;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.*;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.*;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import org.lwjgl.input.Keyboard;
-import org.zeith.hammeranims.api.McUtil;
 import org.zeith.hammerlib.util.mcf.Resources;
 import org.zeith.tcmp.TCMultiplayer;
 import org.zeith.tcmp.friendship.FriendEntry;
 import org.zeith.tcmp.friendship.gui.McAuth;
 import org.zeith.tcmp.friendship.gui.req.GuiFriendRequests;
-import org.zeith.tcmp.friendship.net.FriendshipConstants;
-import org.zeith.tcmp.friendship.net.OnlinePerson;
+import org.zeith.tcmp.friendship.net.*;
 import org.zeith.tcmp.proxy.ClientProxy;
+import org.zeith.tcmp.util.BgExecutor;
 import org.zeith.terraria.api.client.gui.UVs;
 import org.zeith.terraria.client.gui.api.GuiBaseMainBG;
 import org.zeith.terraria.client.gui.mc.buttons.GuiButtonSpriteAndBg;
@@ -187,7 +185,7 @@ public class GuiFriendList
 					{
 						refreshBtn.enabled = true;
 					}
-				}, McUtil.backgroundExecutor()
+				}, BgExecutor.bgExecutor()
 		);
 	}
 	

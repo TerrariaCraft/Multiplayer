@@ -4,11 +4,8 @@ import com.mojang.authlib.GameProfile;
 import com.zeitheron.hammercore.utils.java.tuples.Tuple2;
 import lombok.val;
 import net.minecraft.tileentity.TileEntitySkull;
-import org.zeith.hammeranims.api.McUtil;
-import org.zeith.tcmp.friendship.gui.McAuth;
 
-import java.time.Duration;
-import java.time.Instant;
+import java.time.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
@@ -46,7 +43,7 @@ public class ProfileCache
 		// Avoid contant and unnecessary refreshes
 		tup.setB(Instant.now().plusMillis(TimeUnit.DAYS.toMillis(1L)));
 		
-		McUtil.backgroundExecutor().submit(() ->
+		BgExecutor.bgExecutor().submit(() ->
 		{
 			tup.setA(TileEntitySkull.updateGameProfile(tup.a()));
 			tup.setB(Instant.now());
